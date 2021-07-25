@@ -5,20 +5,14 @@ date: "Summer 2021"
 output: html_document
 ---
 
-```{r include=FALSE,echo=FALSE}   
-require(tidyverse)  
+```{r include=FALSE,echo=FALSE}
+require(tidyverse)
 require(tigerstats)
-require(knitr)   
+require(knitr)
 GSS <-read.csv(file="GSScsv.csv",header=TRUE)
-```
-
-```{r }
-GSSN= select(GSS, ! is.numeric)
-GSSN=purrr::map(GSSN, as.factor)
-GSSN$X<-1:178
-#GSSN = data.frame(GSSN)
-GSS2=select(GSS, is.numeric)
-GSS <- merge(GSSN,GSS2,by="X")
+library(dplyr)
+GSS <- GSS %>%
+mutate(across(where(is.character), as.factor))
 ```
 
 
